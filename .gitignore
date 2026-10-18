@@ -1,0 +1,27 @@
+# Visual Studio / SSDT
+.vs/
+**/.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.vsidx
+*.cache
+*.log
+# Paramètres locaux / secrets
+.env
+.env.*
+!.env.example
+*.local.*
+*.conmgr.local
+# Exports compilés et sauvegardes de bases
+*.ispac
+*.asdatabase
+*.deploymenttargets
+*.deploymentoptions
+*.bak
+*.mdf
+*.ldf
+# Système
+Thumbs.db
+.DS_Store

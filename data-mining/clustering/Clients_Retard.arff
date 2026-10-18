@@ -1,0 +1,23 @@
+@relation Clients_Retard_clustered
+
+@attribute Instance_number numeric
+@attribute Client {'Client_001','Client_002','Client_003','Client_004','Client_005','Client_006','Client_007','Client_008','Client_009','Client_010','Client_011','Client_012','Client_013','Client_014'}
+@attribute Retard numeric
+@attribute Nombre numeric
+@attribute Cluster {cluster0,cluster1}
+
+@data
+0,'Client_001',12,40,cluster0
+1,'Client_002',13,20,cluster0
+2,'Client_003',11,30,cluster0
+3,'Client_004',14,15,cluster0
+4,'Client_005',11,35,cluster0
+5,'Client_006',15,10,cluster0
+6,'Client_007',2,100,cluster1
+7,'Client_008',1,90,cluster1
+8,'Client_009',2,50,cluster1
+9,'Client_010',3,45,cluster1
+10,'Client_011',2,30,cluster1
+11,'Client_012',1,20,cluster1
+12,'Client_013',2,25,cluster1
+13,'Client_014',3,40,cluster1

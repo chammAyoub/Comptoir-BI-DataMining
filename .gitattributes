@@ -1,0 +1,13 @@
+* text=auto
+*.dtsx text
+*.dtproj text
+*.dwproj text
+*.cube text
+*.dim text
+*.dsv text
+*.ds text
+*.ows text
+*.arff text
+*.csv text
+*.jpg binary
+*.png binary

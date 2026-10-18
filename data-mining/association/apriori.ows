@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<scheme version="2.0" title="" description="">
+	<nodes>
+		<node id="0" name="File" qualified_name="Orange.widgets.data.owfile.OWFile" project_name="Orange3" version="" title="Panier_Produits" position="(119.0, 322.0)"/>
+		<node id="1" name="Association Rules" qualified_name="orangecontrib.associate.widgets.owassociate.OWAssociate" project_name="Orange3-Associate" version="" title="Apriori" position="(254.0, 335.0)"/>
+	</nodes>
+	<links>
+		<link id="0" source_node_id="0" sink_node_id="1" source_channel="Data" sink_channel="Data" enabled="true" source_channel_id="data" sink_channel_id="data"/>
+	</links>
+	<annotations/>
+	<thumbnail/>
+	<node_properties>
+		<properties node_id="0" format="literal">{}</properties>
+		<properties node_id="1" format="literal">{'autoFind': False, 'autoSend': True, 'classify': False, 'controlAreaVisible': True, 'filterAntecedentMax': 1000, 'filterAntecedentMin': 1, 'filterConsequentMax': 1000, 'filterConsequentMin': 1, 'filterKeywordsAntecedent': 't', 'filterKeywordsConsequent': 't', 'filterSearch': True, 'maxRules': 10000, 'minConfidence': 100, 'minSupport': 50, 'savedWidgetGeometry': b'\x01\xd9\xd0\xcb\x00\x03\x00\x00\xff\xff\xff\xff\xff\xff\xff\xf9\x00\x00\x05\x00\x00\x00\x02\xa0\x00\x00\x00\x08\x00\x00\x00\x1f\x00\x00\x04\xf7\x00\x00\x02\x97\x00\x00\x00\x00\x02\x00\x00\x00\x05\x00\x00\x00\x00\x00\x00\x00\x00\x17\x00\x00\x04\xff\x00\x00\x02\x9f', '__version__': 1}</properties>
+	</node_properties>
+	<session_state>
+		<window_groups/>
+	</session_state>
+</scheme>

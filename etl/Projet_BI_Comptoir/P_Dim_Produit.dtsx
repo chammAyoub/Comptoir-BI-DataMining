@@ -1,0 +1,410 @@
+<?xml version='1.0' encoding='utf-8'?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts" DTS:refId="Package" DTS:CreationDate="12/8/2025 12:24:09 PM" DTS:CreationName="Microsoft.Package" DTS:CreatorComputerName="LOCAL_MACHINE" DTS:CreatorName="REDACTED" DTS:DTSID="{5A78A29B-D251-411E-B1B8-C720558B2878}" DTS:ExecutableType="Microsoft.Package" DTS:LastModifiedProductVersion="17.0.1008.3" DTS:LocaleID="3072" DTS:ObjectName="Package1" DTS:PackageType="5" DTS:VersionBuild="4" DTS:VersionGUID="{97A03A71-9931-4FA5-9D18-8B43BDDCA88C}">
+  <DTS:Property DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager DTS:refId="Package.ConnectionManagers[LOCAL_MACHINE.comptoirDB]" DTS:CreationName="OLEDB" DTS:DTSID="{63DC0337-2DCD-417F-A7CD-2287562CD32A}" DTS:ObjectName="LOCAL_MACHINE.comptoirDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectRetryCount="1" DTS:ConnectRetryInterval="5" DTS:ConnectionString="Data Source=YOUR_SQL_SERVER;Initial Catalog=comptoirDB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{63DC0337-2DCD-417F-A7CD-2287562CD32A}LOCAL_MACHINE.comptoirDB;Auto Translate=False;"/>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager DTS:refId="Package.ConnectionManagers[LOCAL_MACHINE.ComptoirDW]" DTS:CreationName="OLEDB" DTS:DTSID="{C5BD55A9-6491-42CE-B0D8-E5A9F9EDB5CD}" DTS:ObjectName="LOCAL_MACHINE.ComptoirDW">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager DTS:ConnectRetryCount="1" DTS:ConnectRetryInterval="5" DTS:ConnectionString="Data Source=YOUR_SQL_SERVER;Initial Catalog=ComptoirDW;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package1-{C5BD55A9-6491-42CE-B0D8-E5A9F9EDB5CD}LOCAL_MACHINE.ComptoirDW;Auto Translate=False;"/>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables/>
+  <DTS:Executables>
+    <DTS:Executable DTS:refId="Package\Data Flow Task" DTS:CreationName="Microsoft.Pipeline" DTS:Description="Data Flow Task" DTS:DTSID="{5C5BC777-5389-4484-87C0-674D35EB8148}" DTS:ExecutableType="Microsoft.Pipeline" DTS:LocaleID="-1" DTS:ObjectName="Data Flow Task" DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables/>
+      <DTS:ObjectData>
+        <pipeline version="1">
+          <components>
+            <component refId="Package\Data Flow Task\Merge Join" componentClassID="Microsoft.MergeJoin" contactInfo="Merge Join;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1" description="Combine two sorted data flows into one using the FULL, LEFT, or INNER join. We recommend this transformation when data flows can be sorted at their sources." name="Merge Join" version="1">
+              <properties>
+                <property dataType="System.Int32" description="Specifies the type of join to perform." name="JoinType" typeConverter="JoinType">2</property>
+                <property dataType="System.Int32" description="Specifies the number of columns in the ordering key." name="NumKeyColumns">1</property>
+                <property dataType="System.Boolean" description="Indicates whether the null values are treated as equal values." name="TreatNullsAsEqual">true</property>
+                <property dataType="System.Int32" description="Indicates the requested maximum buffers per input before blocking." name="MaxBuffersPerInput">5</property>
+              </properties>
+              <inputs>
+                <input refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input]" hasSideEffects="true" name="Merge Join Left Input">
+                  <inputColumns>
+                    <inputColumn refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[CODE_CATEGORIE]" cachedCodepage="1252" cachedDataType="str" cachedLength="20" cachedName="CODE_CATEGORIE" cachedSortKeyPosition="1" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[CODE_CATEGORIE]"/>
+                    <inputColumn refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[REF_PRODUIT]" cachedCodepage="1252" cachedDataType="str" cachedLength="10" cachedName="REF_PRODUIT" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[REF_PRODUIT]"/>
+                    <inputColumn refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[NOM_PRODUIT]" cachedCodepage="1252" cachedDataType="str" cachedLength="40" cachedName="NOM_PRODUIT" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[NOM_PRODUIT]"/>
+                    <inputColumn refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[QUANTITE_UNITE]" cachedCodepage="1252" cachedDataType="str" cachedLength="30" cachedName="QUANTITE_UNITE" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[QUANTITE_UNITE]"/>
+                    <inputColumn refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[PRIX_UNITAIRE]" cachedDataType="numeric" cachedName="PRIX_UNITAIRE" cachedPrecision="10" cachedScale="2" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[PRIX_UNITAIRE]"/>
+                  </inputColumns>
+                  <externalMetadataColumns/>
+                </input>
+                <input refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input]" hasSideEffects="true" name="Merge Join Right Input">
+                  <inputColumns>
+                    <inputColumn refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[CODE_CATEGORIE]" cachedCodepage="1252" cachedDataType="str" cachedLength="20" cachedName="CODE_CATEGORIE" cachedSortKeyPosition="1" lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[CODE_CATEGORIE]"/>
+                    <inputColumn refId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[NOM_CATEGORIE]" cachedCodepage="1252" cachedDataType="str" cachedLength="100" cachedName="NOM_CATEGORIE" lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[NOM_CATEGORIE]"/>
+                  </inputColumns>
+                  <externalMetadataColumns/>
+                </input>
+              </inputs>
+              <outputs>
+                <output refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output]" name="Merge Join Output">
+                  <outputColumns>
+                    <outputColumn refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[REF_PRODUIT]" codePage="1252" dataType="str" length="10" lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[REF_PRODUIT]" name="REF_PRODUIT">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[REF_PRODUIT]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[NOM_PRODUIT]" codePage="1252" dataType="str" length="40" lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[NOM_PRODUIT]" name="NOM_PRODUIT">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[NOM_PRODUIT]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[QUANTITE_UNITE]" codePage="1252" dataType="str" length="30" lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[QUANTITE_UNITE]" name="QUANTITE_UNITE">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[QUANTITE_UNITE]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PRIX_UNITAIRE]" dataType="numeric" lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PRIX_UNITAIRE]" name="PRIX_UNITAIRE" precision="10" scale="2">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input].Columns[PRIX_UNITAIRE]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CATEGORIE]" codePage="1252" dataType="str" length="100" lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CATEGORIE]" name="CATEGORIE">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="The input column associated with this output column" name="InputColumnID">#{Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input].Columns[NOM_CATEGORIE]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns/>
+                </output>
+              </outputs>
+            </component>
+            <component refId="Package\Data Flow Task\OLE DB Destination" componentClassID="Microsoft.OLEDBDestination" contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4" description="OLE DB Destination" name="OLE DB Destination" usesDispositions="true" version="4">
+              <properties>
+                <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">[dbo].[DIM_PRODUIT]</property>
+                <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable"/>
+                <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"/>
+                <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode" typeConverter="AccessMode">3</property>
+                <property dataType="System.Boolean" description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on." name="FastLoadKeepIdentity">false</property>
+                <property dataType="System.Boolean" description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on." name="FastLoadKeepNulls">false</property>
+                <property dataType="System.String" description="Specifies options to be used with fast load.  Applies only if fast load is turned on." name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property dataType="System.Int32" description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on." name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection refId="Package\Data Flow Task\OLE DB Destination.Connections[OleDbConnection]" connectionManagerID="Package.ConnectionManagers[LOCAL_MACHINE.ComptoirDW]" connectionManagerRefId="Package.ConnectionManagers[LOCAL_MACHINE.ComptoirDW]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection"/>
+              </connections>
+              <inputs>
+                <input refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]" errorOrTruncationOperation="Insert" errorRowDisposition="FailComponent" hasSideEffects="true" name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[NOM_PRODUIT]" cachedCodepage="1252" cachedDataType="str" cachedLength="40" cachedName="NOM_PRODUIT" externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NOM_PRODUIT]" lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[NOM_PRODUIT]"/>
+                    <inputColumn refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[QUANTITE_UNITE]" cachedCodepage="1252" cachedDataType="str" cachedLength="30" cachedName="QUANTITE_UNITE" externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QUANTITE_UNITE]" lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[QUANTITE_UNITE]"/>
+                    <inputColumn refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[CATEGORIE]" cachedCodepage="1252" cachedDataType="str" cachedLength="100" cachedName="CATEGORIE" externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CATEGORIE]" lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[CATEGORIE]"/>
+                    <inputColumn refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[REF_PRODUIT]" cachedCodepage="1252" cachedDataType="str" cachedLength="10" cachedName="REF_PRODUIT" externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[REF_PRODUIT_SOURCE]" lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[REF_PRODUIT]"/>
+                    <inputColumn refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].Columns[PRIX_UNITAIRE]" cachedDataType="numeric" cachedName="PRIX_UNITAIRE" cachedPrecision="10" cachedScale="2" externalMetadataColumnId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRIX_UNITAIRE_ACTUEL]" lineageId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output].Columns[PRIX_UNITAIRE]"/>
+                  </inputColumns>
+                  <externalMetadataColumns isUsed="True">
+                    <externalMetadataColumn refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[ID_PRODUIT]" dataType="i4" name="ID_PRODUIT"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[REF_PRODUIT_SOURCE]" codePage="1252" dataType="str" length="20" name="REF_PRODUIT_SOURCE"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[NOM_PRODUIT]" codePage="1252" dataType="str" length="100" name="NOM_PRODUIT"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[CATEGORIE]" codePage="1252" dataType="str" length="100" name="CATEGORIE"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[PRIX_UNITAIRE_ACTUEL]" dataType="numeric" name="PRIX_UNITAIRE_ACTUEL" precision="10" scale="2"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input].ExternalColumns[QUANTITE_UNITE]" codePage="1252" dataType="str" length="50" name="QUANTITE_UNITE"/>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output]" exclusionGroup="1" isErrorOut="true" name="OLE DB Destination Error Output" synchronousInputId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]" dataType="i4" lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]" name="ErrorCode" specialFlags="1"/>
+                    <outputColumn refId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]" dataType="i4" lineageId="Package\Data Flow Task\OLE DB Destination.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]" name="ErrorColumn" specialFlags="2"/>
+                  </outputColumns>
+                  <externalMetadataColumns/>
+                </output>
+              </outputs>
+            </component>
+            <component refId="Package\Data Flow Task\Sort" componentClassID="Microsoft.Sort" contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1" description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows." name="Sort" version="1">
+              <properties>
+                <property dataType="System.Boolean" description="Indicates whether the Sort transformation removes rows with duplicate sort values." name="EliminateDuplicates">false</property>
+                <property dataType="System.Int32" description="Specifies the maximum number of threads to use for sorting." expressionType="Notify" name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input refId="Package\Data Flow Task\Sort.Inputs[Sort Input]" name="Sort Input">
+                  <inputColumns>
+                    <inputColumn refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[REF_PRODUIT]" cachedCodepage="1252" cachedDataType="str" cachedLength="10" cachedName="REF_PRODUIT" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[REF_PRODUIT]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[NOM_PRODUIT]" cachedCodepage="1252" cachedDataType="str" cachedLength="40" cachedName="NOM_PRODUIT" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[NOM_PRODUIT]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[CODE_CATEGORIE]" cachedCodepage="1252" cachedDataType="str" cachedLength="20" cachedName="CODE_CATEGORIE" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[CODE_CATEGORIE]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[QUANTITE_UNITE]" cachedCodepage="1252" cachedDataType="str" cachedLength="30" cachedName="QUANTITE_UNITE" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[QUANTITE_UNITE]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[PRIX_UNITAIRE]" cachedDataType="numeric" cachedName="PRIX_UNITAIRE" cachedPrecision="10" cachedScale="2" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[PRIX_UNITAIRE]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[UNITE_STOCK]" cachedDataType="i4" cachedName="UNITE_STOCK" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[UNITE_STOCK]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[UNITES_COMMANDEES]" cachedDataType="i4" cachedName="UNITES_COMMANDEES" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[UNITES_COMMANDEES]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[NIVEAU_REAPRO]" cachedDataType="i4" cachedName="NIVEAU_REAPRO" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[NIVEAU_REAPRO]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn refId="Package\Data Flow Task\Sort.Inputs[Sort Input].Columns[INDISPONIBLE]" cachedDataType="i4" cachedName="INDISPONIBLE" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[INDISPONIBLE]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns/>
+                </input>
+              </inputs>
+              <outputs>
+                <output refId="Package\Data Flow Task\Sort.Outputs[Sort Output]" isSorted="true" name="Sort Output">
+                  <outputColumns>
+                    <outputColumn refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[REF_PRODUIT]" codePage="1252" dataType="str" length="10" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[REF_PRODUIT]" name="REF_PRODUIT">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[REF_PRODUIT]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[NOM_PRODUIT]" codePage="1252" dataType="str" length="40" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[NOM_PRODUIT]" name="NOM_PRODUIT">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[NOM_PRODUIT]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[CODE_CATEGORIE]" codePage="1252" dataType="str" length="20" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[CODE_CATEGORIE]" name="CODE_CATEGORIE" sortKeyPosition="1">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[CODE_CATEGORIE]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[QUANTITE_UNITE]" codePage="1252" dataType="str" length="30" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[QUANTITE_UNITE]" name="QUANTITE_UNITE">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[QUANTITE_UNITE]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[PRIX_UNITAIRE]" dataType="numeric" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[PRIX_UNITAIRE]" name="PRIX_UNITAIRE" precision="10" scale="2">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[PRIX_UNITAIRE]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[UNITE_STOCK]" dataType="i4" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[UNITE_STOCK]" name="UNITE_STOCK">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[UNITE_STOCK]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[UNITES_COMMANDEES]" dataType="i4" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[UNITES_COMMANDEES]" name="UNITES_COMMANDEES">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[UNITES_COMMANDEES]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[NIVEAU_REAPRO]" dataType="i4" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[NIVEAU_REAPRO]" name="NIVEAU_REAPRO">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[NIVEAU_REAPRO]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[INDISPONIBLE]" dataType="i4" lineageId="Package\Data Flow Task\Sort.Outputs[Sort Output].Columns[INDISPONIBLE]" name="INDISPONIBLE">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[INDISPONIBLE]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns/>
+                </output>
+              </outputs>
+            </component>
+            <component refId="Package\Data Flow Task\Sort 1" componentClassID="Microsoft.Sort" contactInfo="Sort;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1" description="Sorts input data in ascending or descending order when it cannot be sorted at its source. For example, sort sales data by 'customer id' before it is written to a flat file and delivered to another department. Note: We do not recommend this transformation for large data flows." name="Sort 1" version="1">
+              <properties>
+                <property dataType="System.Boolean" description="Indicates whether the Sort transformation removes rows with duplicate sort values." name="EliminateDuplicates">false</property>
+                <property dataType="System.Int32" description="Specifies the maximum number of threads to use for sorting." expressionType="Notify" name="MaximumThreads">-1</property>
+              </properties>
+              <inputs>
+                <input refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input]" name="Sort Input">
+                  <inputColumns>
+                    <inputColumn refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input].Columns[CODE_CATEGORIE]" cachedCodepage="1252" cachedDataType="str" cachedLength="20" cachedName="CODE_CATEGORIE" lineageId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].Columns[CODE_CATEGORIE]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">1</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input].Columns[NOM_CATEGORIE]" cachedCodepage="1252" cachedDataType="str" cachedLength="100" cachedName="NOM_CATEGORIE" lineageId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].Columns[NOM_CATEGORIE]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                    <inputColumn refId="Package\Data Flow Task\Sort 1.Inputs[Sort Input].Columns[DESCRIPTION]" cachedCodepage="1252" cachedDataType="text" cachedName="DESCRIPTION" lineageId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].Columns[DESCRIPTION]">
+                      <properties>
+                        <property dataType="System.Int32" description="Specifies the comparison options for character data." name="NewComparisonFlags">0</property>
+                        <property dataType="System.Int32" description="Specifies the sort order of the column." name="NewSortKeyPosition">0</property>
+                      </properties>
+                    </inputColumn>
+                  </inputColumns>
+                  <externalMetadataColumns/>
+                </input>
+              </inputs>
+              <outputs>
+                <output refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output]" isSorted="true" name="Sort Output">
+                  <outputColumns>
+                    <outputColumn refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[CODE_CATEGORIE]" codePage="1252" dataType="str" length="20" lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[CODE_CATEGORIE]" name="CODE_CATEGORIE" sortKeyPosition="1">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].Columns[CODE_CATEGORIE]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[NOM_CATEGORIE]" codePage="1252" dataType="str" length="100" lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[NOM_CATEGORIE]" name="NOM_CATEGORIE">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].Columns[NOM_CATEGORIE]}</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn refId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[DESCRIPTION]" codePage="1252" dataType="text" lineageId="Package\Data Flow Task\Sort 1.Outputs[Sort Output].Columns[DESCRIPTION]" name="DESCRIPTION">
+                      <properties>
+                        <property containsID="true" dataType="System.Int32" description="Specifies the lineage identifier of the input column that is associated with this output column." name="SortColumnId">#{Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].Columns[DESCRIPTION]}</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns/>
+                </output>
+              </outputs>
+            </component>
+            <component refId="Package\Data Flow Task\Source_categorie" componentClassID="Microsoft.OLEDBSource" contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7" description="OLE DB Source" name="Source_categorie" usesDispositions="true" version="7">
+              <properties>
+                <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">[dbo].[COMPTOIR_CATEGORIES]</property>
+                <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable"/>
+                <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"/>
+                <property dataType="System.String" description="The variable that contains the SQL command to be executed." name="SqlCommandVariable"/>
+                <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode" typeConverter="AccessMode">0</property>
+                <property dataType="System.String" description="The mappings between the parameters in the SQL command and variables." name="ParameterMapping"/>
+              </properties>
+              <connections>
+                <connection refId="Package\Data Flow Task\Source_categorie.Connections[OleDbConnection]" connectionManagerID="Package.ConnectionManagers[LOCAL_MACHINE.comptoirDB]" connectionManagerRefId="Package.ConnectionManagers[LOCAL_MACHINE.comptoirDB]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection"/>
+              </connections>
+              <outputs>
+                <output refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output]" name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].Columns[CODE_CATEGORIE]" codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].ExternalColumns[CODE_CATEGORIE]" length="20" lineageId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].Columns[CODE_CATEGORIE]" name="CODE_CATEGORIE" truncationRowDisposition="FailComponent"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].Columns[NOM_CATEGORIE]" codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].ExternalColumns[NOM_CATEGORIE]" length="100" lineageId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].Columns[NOM_CATEGORIE]" name="NOM_CATEGORIE" truncationRowDisposition="FailComponent"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].Columns[DESCRIPTION]" codePage="1252" dataType="text" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].ExternalColumns[DESCRIPTION]" lineageId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].Columns[DESCRIPTION]" name="DESCRIPTION" truncationRowDisposition="FailComponent"/>
+                  </outputColumns>
+                  <externalMetadataColumns isUsed="True">
+                    <externalMetadataColumn refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].ExternalColumns[CODE_CATEGORIE]" codePage="1252" dataType="str" length="20" name="CODE_CATEGORIE"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].ExternalColumns[NOM_CATEGORIE]" codePage="1252" dataType="str" length="100" name="NOM_CATEGORIE"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output].ExternalColumns[DESCRIPTION]" codePage="1252" dataType="text" name="DESCRIPTION"/>
+                  </externalMetadataColumns>
+                </output>
+                <output refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Error Output]" isErrorOut="true" name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Error Output].Columns[CODE_CATEGORIE]" codePage="1252" dataType="str" length="20" lineageId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Error Output].Columns[CODE_CATEGORIE]" name="CODE_CATEGORIE"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Error Output].Columns[NOM_CATEGORIE]" codePage="1252" dataType="str" length="100" lineageId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Error Output].Columns[NOM_CATEGORIE]" name="NOM_CATEGORIE"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Error Output].Columns[DESCRIPTION]" codePage="1252" dataType="text" lineageId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Error Output].Columns[DESCRIPTION]" name="DESCRIPTION"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Error Output].Columns[ErrorCode]" dataType="i4" lineageId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Error Output].Columns[ErrorCode]" name="ErrorCode" specialFlags="1"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]" dataType="i4" lineageId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]" name="ErrorColumn" specialFlags="2"/>
+                  </outputColumns>
+                  <externalMetadataColumns/>
+                </output>
+              </outputs>
+            </component>
+            <component refId="Package\Data Flow Task\Source_produit" componentClassID="Microsoft.OLEDBSource" contactInfo="OLE DB Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;7" description="OLE DB Source" name="Source_produit" usesDispositions="true" version="7">
+              <properties>
+                <property dataType="System.Int32" description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out." name="CommandTimeout">0</property>
+                <property dataType="System.String" description="Specifies the name of the database object used to open a rowset." name="OpenRowset">[dbo].[COMPTOIR_PRODUITS]</property>
+                <property dataType="System.String" description="Specifies the variable that contains the name of the database object used to open a rowset." name="OpenRowsetVariable"/>
+                <property dataType="System.String" description="The SQL command to be executed." name="SqlCommand" UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor, Microsoft.DataTransformationServices.Controls, Version=17.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91"/>
+                <property dataType="System.String" description="The variable that contains the SQL command to be executed." name="SqlCommandVariable"/>
+                <property dataType="System.Int32" description="Specifies the column code page to use when code page information is unavailable from the data source." name="DefaultCodePage">1252</property>
+                <property dataType="System.Boolean" description="Forces the use of the DefaultCodePage property value when describing character data." name="AlwaysUseDefaultCodePage">false</property>
+                <property dataType="System.Int32" description="Specifies the mode used to access the database." name="AccessMode" typeConverter="AccessMode">0</property>
+                <property dataType="System.String" description="The mappings between the parameters in the SQL command and variables." name="ParameterMapping"/>
+              </properties>
+              <connections>
+                <connection refId="Package\Data Flow Task\Source_produit.Connections[OleDbConnection]" connectionManagerID="Package.ConnectionManagers[LOCAL_MACHINE.comptoirDB]" connectionManagerRefId="Package.ConnectionManagers[LOCAL_MACHINE.comptoirDB]" description="The OLE DB runtime connection used to access the database." name="OleDbConnection"/>
+              </connections>
+              <outputs>
+                <output refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output]" name="OLE DB Source Output">
+                  <outputColumns>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[REF_PRODUIT]" codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[REF_PRODUIT]" length="10" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[REF_PRODUIT]" name="REF_PRODUIT" truncationRowDisposition="FailComponent"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[NOM_PRODUIT]" codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[NOM_PRODUIT]" length="40" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[NOM_PRODUIT]" name="NOM_PRODUIT" truncationRowDisposition="FailComponent"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[CODE_CATEGORIE]" codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[CODE_CATEGORIE]" length="20" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[CODE_CATEGORIE]" name="CODE_CATEGORIE" truncationRowDisposition="FailComponent"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[QUANTITE_UNITE]" codePage="1252" dataType="str" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[QUANTITE_UNITE]" length="30" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[QUANTITE_UNITE]" name="QUANTITE_UNITE" truncationRowDisposition="FailComponent"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[PRIX_UNITAIRE]" dataType="numeric" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[PRIX_UNITAIRE]" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[PRIX_UNITAIRE]" name="PRIX_UNITAIRE" precision="10" scale="2" truncationRowDisposition="FailComponent"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[UNITE_STOCK]" dataType="i4" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[UNITE_STOCK]" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[UNITE_STOCK]" name="UNITE_STOCK" truncationRowDisposition="FailComponent"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[UNITES_COMMANDEES]" dataType="i4" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[UNITES_COMMANDEES]" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[UNITES_COMMANDEES]" name="UNITES_COMMANDEES" truncationRowDisposition="FailComponent"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[NIVEAU_REAPRO]" dataType="i4" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[NIVEAU_REAPRO]" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[NIVEAU_REAPRO]" name="NIVEAU_REAPRO" truncationRowDisposition="FailComponent"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[INDISPONIBLE]" dataType="i4" errorOrTruncationOperation="Conversion" errorRowDisposition="FailComponent" externalMetadataColumnId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[INDISPONIBLE]" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].Columns[INDISPONIBLE]" name="INDISPONIBLE" truncationRowDisposition="FailComponent"/>
+                  </outputColumns>
+                  <externalMetadataColumns isUsed="True">
+                    <externalMetadataColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[REF_PRODUIT]" codePage="1252" dataType="str" length="10" name="REF_PRODUIT"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[NOM_PRODUIT]" codePage="1252" dataType="str" length="40" name="NOM_PRODUIT"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[CODE_CATEGORIE]" codePage="1252" dataType="str" length="20" name="CODE_CATEGORIE"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[QUANTITE_UNITE]" codePage="1252" dataType="str" length="30" name="QUANTITE_UNITE"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[PRIX_UNITAIRE]" dataType="numeric" name="PRIX_UNITAIRE" precision="10" scale="2"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[UNITE_STOCK]" dataType="i4" name="UNITE_STOCK"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[UNITES_COMMANDEES]" dataType="i4" name="UNITES_COMMANDEES"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[NIVEAU_REAPRO]" dataType="i4" name="NIVEAU_REAPRO"/>
+                    <externalMetadataColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output].ExternalColumns[INDISPONIBLE]" dataType="i4" name="INDISPONIBLE"/>
+                  </externalMetadataColumns>
+                </output>
+                <output refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output]" isErrorOut="true" name="OLE DB Source Error Output">
+                  <outputColumns>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[REF_PRODUIT]" codePage="1252" dataType="str" length="10" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[REF_PRODUIT]" name="REF_PRODUIT"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[NOM_PRODUIT]" codePage="1252" dataType="str" length="40" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[NOM_PRODUIT]" name="NOM_PRODUIT"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[CODE_CATEGORIE]" codePage="1252" dataType="str" length="20" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[CODE_CATEGORIE]" name="CODE_CATEGORIE"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[QUANTITE_UNITE]" codePage="1252" dataType="str" length="30" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[QUANTITE_UNITE]" name="QUANTITE_UNITE"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[PRIX_UNITAIRE]" dataType="numeric" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[PRIX_UNITAIRE]" name="PRIX_UNITAIRE" precision="10" scale="2"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[UNITE_STOCK]" dataType="i4" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[UNITE_STOCK]" name="UNITE_STOCK"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[UNITES_COMMANDEES]" dataType="i4" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[UNITES_COMMANDEES]" name="UNITES_COMMANDEES"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[NIVEAU_REAPRO]" dataType="i4" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[NIVEAU_REAPRO]" name="NIVEAU_REAPRO"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[INDISPONIBLE]" dataType="i4" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[INDISPONIBLE]" name="INDISPONIBLE"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[ErrorCode]" dataType="i4" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[ErrorCode]" name="ErrorCode" specialFlags="1"/>
+                    <outputColumn refId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]" dataType="i4" lineageId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Error Output].Columns[ErrorColumn]" name="ErrorColumn" specialFlags="2"/>
+                  </outputColumns>
+                  <externalMetadataColumns/>
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path refId="Package\Data Flow Task.Paths[Merge Join Output]" endId="Package\Data Flow Task\OLE DB Destination.Inputs[OLE DB Destination Input]" name="Merge Join Output" startId="Package\Data Flow Task\Merge Join.Outputs[Merge Join Output]"/>
+            <path refId="Package\Data Flow Task.Paths[OLE DB Source Output]" endId="Package\Data Flow Task\Sort.Inputs[Sort Input]" name="OLE DB Source Output" startId="Package\Data Flow Task\Source_produit.Outputs[OLE DB Source Output]"/>
+            <path refId="Package\Data Flow Task.Paths[OLE DB Source Output1]" endId="Package\Data Flow Task\Sort 1.Inputs[Sort Input]" name="OLE DB Source Output" startId="Package\Data Flow Task\Source_categorie.Outputs[OLE DB Source Output]"/>
+            <path refId="Package\Data Flow Task.Paths[Sort Output]" endId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Left Input]" name="Sort Output" startId="Package\Data Flow Task\Sort.Outputs[Sort Output]"/>
+            <path refId="Package\Data Flow Task.Paths[Sort Output1]" endId="Package\Data Flow Task\Merge Join.Inputs[Merge Join Right Input]" name="Sort Output" startId="Package\Data Flow Task\Sort 1.Outputs[Sort Output]"/>
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  </DTS:Executable>
